@@ -22,16 +22,15 @@ public class Controller {
     }
 
     @GetMapping("/{user}")
-    public List<String> getRepoNames(@PathVariable String user){
+    public String[] getRepoNames(@PathVariable String user){
 
         Repo[] repos = gitHubService.getRepos(user);
 
-        List<String> repoNames = new ArrayList<>();
-
-        for (Repo repo : repos){
-            repoNames.add(repo.getName());
+        String[] repositoryNames = new String[repos.length];
+        for (int i=0; i<repositoryNames.length; i++) {
+            repositoryNames[i] = repos[i].getName();
         }
-        return repoNames;
+        return repositoryNames;
 
     }
 }

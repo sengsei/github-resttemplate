@@ -11,6 +11,5 @@ public class GitHubService {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Repo[]> response = restTemplate.getForEntity(url, Repo[].class);
         return response.getBody();
-
     }
 }
