@@ -15,15 +15,16 @@ import java.util.List;
 @RequestMapping("/github")
 public class Controller {
 
+    private final GitHubService gitHubService;
+
+    public Controller(GitHubService gitHubService) {
+        this.gitHubService = gitHubService;
+    }
+
     @GetMapping("/{user}")
     public List<String> getRepoNames(@PathVariable String user){
 
-
-        String url = "https://api.github.com/users/" + user + "/repos";
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Repo[]> result = restTemplate.getForEntity(url, Repo[].class);
-
-        Repo[] repos = result.getBody();
+        Repo[] repos = gitHubService.getRepos(user);
 
         List<String> repoNames = new ArrayList<>();
 
